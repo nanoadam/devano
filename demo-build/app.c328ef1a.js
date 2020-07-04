@@ -127,12 +127,24 @@ exports.default = Nano;
 
 function Nano(_ref) {
   var element = _ref.element,
-      state = _ref.state;
+      state = _ref.state,
+      components = _ref.components;
   this.element = element;
   this.state = state;
+  this.components = components;
+
+  if (!this.element) {
+    return this.createError(new Error('Please provide a element to attach the Nano App to'));
+  }
 
   if (!document.querySelector(this.element)) {
     return this.createError(new Error("Element ".concat(this.element, " not found")));
+  }
+
+  if (this.components) {
+    if (!Array.isArray(this.components)) {
+      return this.createError(new Error('Components should be passed as an array'));
+    }
   }
 
   var elementDOM = document.querySelector(this.element);
@@ -151,7 +163,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 new _src.default({
   element: '#root',
-  state: {}
+  state: {},
+  components: ['']
 });
 },{"../src":"../src/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -181,7 +194,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52068" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54525" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
