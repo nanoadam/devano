@@ -21,6 +21,8 @@ export default function Nano({ element, state, components }) {
     }
   }
 
+  this.element.append(components[0]);
+
   const elementDOM = document.querySelector(this.element);
 
   console.log(elementDOM);
