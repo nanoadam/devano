@@ -25,10 +25,25 @@ export default function Nano({ element, state, components }) {
   }
 
   this.components.forEach((elem) => {
-    return (this.element.innerHTML += `${elem}`);
+    let template = this.createTemplate(elem);
+    return (this.element.innerHTML += `${template}`);
   });
 }
 
 Nano.prototype.createError = (err) => {
   console.error(err);
+};
+
+Nano.prototype.createTemplate = (elem) => {
+  let raw = String(elem.template);
+  let newRaw;
+  let re = elem.template.match(/\{{.*?\}}/g);
+  if (re) {
+    re.forEach((match) => {
+      let js = match.split(/[{{}}]/g)[2].trim();
+      console.log(match);
+      newRaw = raw.replace(new RegExp(match), elem.state[js]);
+    });
+  }
+  return newRaw;
 };
