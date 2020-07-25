@@ -5,7 +5,7 @@ export default function Nano({ element, state, components }) {
 
   if (!this.element) {
     return this.createError(
-      new Error('Please provide a element to attach the Nano App to')
+      new Error("Please provide a element to attach the Nano App to")
     );
   }
 
@@ -19,7 +19,7 @@ export default function Nano({ element, state, components }) {
   if (this.components) {
     if (!Array.isArray(this.components)) {
       return this.createError(
-        new Error('Components should be passed as an array')
+        new Error("Components should be passed as an array")
       );
     }
   }
@@ -41,7 +41,7 @@ Nano.prototype.createTemplate = (elem) => {
   if (re) {
     re.forEach((match) => {
       let js = match.split(/[{{}}]/g)[2].trim();
-      console.log(match);
+      console.log("Match: " + match);
       newRaw = raw.replace(new RegExp(match), elem.state[js]);
     });
   }

@@ -1,8 +1,7 @@
-import Nano from '../src';
-import Navbar from './components/navbar/navbar-component';
+import Nano from "../src";
 
 new Nano({
-  element: '#root',
+  element: "#root",
   state: {},
-  components: [Navbar],
+  components: [],
 });
