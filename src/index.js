@@ -1,49 +1,39 @@
-export default function Nano({ element, state, components }) {
+export default function Devano({ element, state, components }) {
   this.element = element;
-  this.state = state;
   this.components = components;
 
   if (!this.element) {
     return this.createError(
-      new Error("Please provide a element to attach the Nano App to")
+      "Please provide a element to attach the Nano App to"
     );
   }
 
   if (!document.querySelector(this.element)) {
-    return this.createError(new Error(`Element ${this.element} not found`));
+    return this.createError(`Element ${this.element} not found`);
   }
 
   let domElement = this.element;
   this.element = document.querySelector(domElement);
 
+  if (!this.components) {
+    return this.createMsg("Devano will run without components");
+  }
+
   if (this.components) {
     if (!Array.isArray(this.components)) {
-      return this.createError(
-        new Error("Components should be passed as an array")
-      );
+      return this.createError("Components should be passed as an array");
     }
   }
 
   this.components.forEach((elem) => {
-    let template = this.createTemplate(elem);
-    return (this.element.innerHTML += `${template}`);
+    console.log(elem);
   });
 }
 
-Nano.prototype.createError = (err) => {
-  console.error(err);
+Devano.prototype.createError = (err) => {
+  console.error("%c" + new Error(err), "background: #ba2905; color: white;");
 };
 
-Nano.prototype.createTemplate = (elem) => {
-  let raw = String(elem.template);
-  let newRaw;
-  let re = elem.template.match(/\{{.*?\}}/g);
-  if (re) {
-    re.forEach((match) => {
-      let js = match.split(/[{{}}]/g)[2].trim();
-      console.log("Match: " + match);
-      newRaw = raw.replace(new RegExp(match), elem.state[js]);
-    });
-  }
-  return newRaw;
+Devano.prototype.createMsg = (msg) => {
+  console.log("%c" + msg, "background: blueviolet; color: #fff");
 };

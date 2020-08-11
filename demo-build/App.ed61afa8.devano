@@ -1,0 +1,12 @@
+{{ template }}
+
+<h1>Hello World</h1>
+
+{{ end template }}
+
+{{ script }}
+
+console.log("Hello World")
+
+{{ end script }}
+

@@ -123,74 +123,65 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Nano;
+exports.default = Devano;
 
-function Nano(_ref) {
-  var _this = this;
-
+function Devano(_ref) {
   var element = _ref.element,
       state = _ref.state,
       components = _ref.components;
   this.element = element;
-  this.state = state;
   this.components = components;
 
   if (!this.element) {
-    return this.createError(new Error("Please provide a element to attach the Nano App to"));
+    return this.createError("Please provide a element to attach the Nano App to");
   }
 
   if (!document.querySelector(this.element)) {
-    return this.createError(new Error("Element ".concat(this.element, " not found")));
+    return this.createError("Element ".concat(this.element, " not found"));
   }
 
   var domElement = this.element;
   this.element = document.querySelector(domElement);
 
+  if (!this.components) {
+    return this.createMsg("Devano will run without components");
+  }
+
   if (this.components) {
     if (!Array.isArray(this.components)) {
-      return this.createError(new Error("Components should be passed as an array"));
+      return this.createError("Components should be passed as an array");
     }
   }
 
   this.components.forEach(function (elem) {
-    var template = _this.createTemplate(elem);
-
-    return _this.element.innerHTML += "".concat(template);
+    console.log(elem);
   });
 }
 
-Nano.prototype.createError = function (err) {
-  console.error(err);
+Devano.prototype.createError = function (err) {
+  console.error("%c" + new Error(err), "background: #ba2905; color: white;");
 };
 
-Nano.prototype.createTemplate = function (elem) {
-  var raw = String(elem.template);
-  var newRaw;
-  var re = elem.template.match(/\{{.*?\}}/g);
-
-  if (re) {
-    re.forEach(function (match) {
-      var js = match.split(/[{{}}]/g)[2].trim();
-      console.log("Match: " + match);
-      newRaw = raw.replace(new RegExp(match), elem.state[js]);
-    });
-  }
-
-  return newRaw;
+Devano.prototype.createMsg = function (msg) {
+  console.log("%c" + msg, "background: blueviolet; color: #fff");
 };
-},{}],"app.js":[function(require,module,exports) {
+},{}],"App.devano":[function(require,module,exports) {
+module.exports = "/App.ed61afa8.devano";
+},{}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _src = _interopRequireDefault(require("../src"));
 
+var _App = _interopRequireDefault(require("./App.devano"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-new _src.default({
-  element: "#root",
-  state: {},
-  components: []
+var app = new _src.default({
+  element: "#app",
+  components: [_App.default]
 });
-},{"../src":"../src/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+console.log(app);
+},{"../src":"../src/index.js","./App.devano":"App.devano"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -218,7 +209,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61819" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54767" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -394,5 +385,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","app.js"], null)
-//# sourceMappingURL=/app.c328ef1a.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
+//# sourceMappingURL=/main.1f19ae8e.js.map
